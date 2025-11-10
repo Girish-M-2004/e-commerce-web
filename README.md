@@ -1,73 +1,50 @@
-# Welcome to your Lovable project
+# E-commerce (React + Express + MongoDB)
 
-## Project info
+Full-stack demo shop with product browsing, product detail, and a client-side cart.
 
-**URL**: https://lovable.dev/projects/6820a6d9-4a5c-42ad-ab5b-17a0feaddb74
+## Tech
+- Frontend: React 18, React Router 6, Vite, TypeScript, CSS
+- Backend: Node.js, Express.js, Mongoose (MongoDB)
 
-## How can I edit this code?
+## Prerequisites
+- Node.js 18+
+- MongoDB (local or Atlas)
 
-There are several ways of editing your application.
+## Setup
+1. Install deps:
+   - `npm install`
+2. Configure environment:
+   - Server expects `MONGODB_URI`, `PORT` (default 5000), `CLIENT_ORIGIN` (default http://localhost:5173)
+   - Client expects `VITE_API_BASE_URL` (default http://localhost:5000)
+   - You can set these in environment variables or create `.env` files in `server/` and `client/` respectively.
+3. Seed database:
+   - `npm run seed`
+4. Run dev (client and server):
+   - `npm run dev`
 
-**Use Lovable**
+## Scripts
+- Root:
+  - `dev` – runs server and client together
+  - `build` – builds server and client
+  - `start` – starts built server
+  - `seed` – seeds MongoDB with sample data
+- Server:
+  - `npm run dev -w server` – dev server
+  - `npm run build -w server` – build
+  - `npm run start -w server` – start build
+  - `npm run seed -w server` – seed data
+- Client:
+  - `npm run dev -w client` – dev frontend
+  - `npm run build -w client` – build frontend
+  - `npm run preview -w client` – preview build
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/6820a6d9-4a5c-42ad-ab5b-17a0feaddb74) and start prompting.
+## API
+- `GET /api/health`
+- `GET /api/categories`
+- `GET /api/products?q&category&sort&page&limit`
+- `GET /api/products/:id`
 
-Changes made via Lovable will be committed automatically to this repo.
+## Notes
+- Cart is stored in `localStorage`.
+- Images use remote placeholders (Unsplash). Internet required for images.
 
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/6820a6d9-4a5c-42ad-ab5b-17a0feaddb74) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
