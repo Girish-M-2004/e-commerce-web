@@ -2,8 +2,7 @@ import { createContext, useContext, useState, ReactNode } from 'react';
 import { toast } from 'sonner';
 
 export interface Product {
-  id?: string;
-  _id?: string;
+  id: string;
   name: string;
   price: number;
   description: string;
@@ -33,8 +32,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
   const addToCart = (product: Product) => {
     setCart((prevCart) => {
-      const productId = product.id || product._id || '';
-      const existingItem = prevCart.find((item) => (item.id || item._id) === productId);
+      const existingItem = prevCart.find((item) => item.id === product.id);
       
       if (existingItem) {
         if (existingItem.quantity >= product.stock) {
@@ -43,14 +41,14 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         }
         toast.success('Quantity updated in cart');
         return prevCart.map((item) =>
-          (item.id || item._id) === productId
+          item.id === product.id
             ? { ...item, quantity: item.quantity + 1 }
             : item
         );
       }
       
       toast.success('Added to cart');
-      return [...prevCart, { ...product, id: productId, quantity: 1 }];
+      return [...prevCart, { ...product, quantity: 1 }];
     });
   };
 

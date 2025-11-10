@@ -1,48 +1,22 @@
-import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ShoppingCart, ArrowLeft, Package } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { fetchProductById } from '@/api/api';
+import { products } from '@/data/products';
 import { useCart } from '@/contexts/CartContext';
-import { Product } from '@/contexts/CartContext';
 
 const ProductDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { addToCart } = useCart();
-  const [product, setProduct] = useState<Product | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  
+  const product = products.find((p) => p.id === id);
 
-  useEffect(() => {
-    if (!id) return;
-    
-    fetchProductById(id)
-      .then(res => {
-        setProduct(res.data);
-        setLoading(false);
-      })
-      .catch(err => {
-        setError('Failed to load product');
-        setLoading(false);
-        console.error(err);
-      });
-  }, [id]);
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <p className="text-xl text-muted-foreground">Loading...</p>
-      </div>
-    );
-  }
-
-  if (error || !product) {
+  if (!product) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center">
-          <h2 className="text-2xl font-bold mb-4">{error || 'Product not found'}</h2>
+          <h2 className="text-2xl font-bold mb-4">Product not found</h2>
           <Button onClick={() => navigate('/')}>Back to Products</Button>
         </div>
       </div>
